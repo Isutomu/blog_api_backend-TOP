@@ -8,7 +8,7 @@ const corsOptions = require("./config/corsOptions");
 // General setup
 const app = express();
 app.use(cors());
-app.use(helmet({ crossOriginResourcePolicy: false }));
+// app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
