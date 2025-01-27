@@ -12,7 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use("/", cors(corsOptions), routes);
+// app.use("/", cors(corsOptions), routes);
+app.use("/", routes);
 
 // Server
 app.listen(process.env.PORT, () =>
