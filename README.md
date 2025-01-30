@@ -37,3 +37,5 @@ There is no particular reason why I chose this project to maintain besides this 
 - (Not priority) Convert to RESTful
 - (Really not a priority) Convert to Typescript
 - (Not priority) Add proper error handling for the application
+- Validate user input data (express-validator)
+- Implement testing (unit testing? integration testing?)
