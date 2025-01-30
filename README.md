@@ -22,6 +22,10 @@ Both (README and issues) are going to be updated as the times goes on, so if you
 There is no particular reason why I chose this project to maintain besides this being my 1st fullstack project.
 
 ## Future features
+
+> [!IMPORTANT]
+> Modifiers ("not priority" and the like) don't imply importance. Most of the time they simply mean that I thought they were too difficult to tackle for now.
+
 - Set up cors with whitelist for the currently deployed frontends
 - Implement other more obvious security measures by  proper configuring (and enabling) the helmet middleware
 - Test the current security measures and thicken them as needed (measures with be listed below after implementation)
@@ -32,3 +36,4 @@ There is no particular reason why I chose this project to maintain besides this 
 - (Not priority) Generate documentation of the API (automatic? manual? automatic with manual touch ups?)
 - (Not priority) Convert to RESTful
 - (Really not a priority) Convert to Typescript
+- (Not priority) Add proper error handling for the application
