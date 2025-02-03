@@ -7,14 +7,12 @@ const corsOptions = require("./config/corsOptions");
 
 // General setup
 const app = express();
-app.use(cors());
 // app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-// app.use("/", cors(corsOptions), routes);
-app.use("/", routes);
+app.use("/", cors(corsOptions), routes);
 
 // Server
 app.listen(process.env.PORT, () =>
