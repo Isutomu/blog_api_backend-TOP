@@ -1,8 +1,5 @@
 const corsOptions = {
-  origin: [
-    "https://isutomu.github.io/blog_api_visitor-TOP",
-    "https://isutomu.github.io/blog_api_admin-TOP",
-  ],
+  origin: process.env.CORS_ORIGIN,
   optionsSuccessStatus: 200,
 };
 
