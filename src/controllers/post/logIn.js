@@ -15,9 +15,12 @@ module.exports.logIn = asyncHandler(async (req, res) => {
   if (match) {
     const opts = {};
     opts.expiresIn = 7200; // jwt expires in 2 hours
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, opts);
+    const payload = { sub: user.id, iat: Date.now() };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, opts);
 
-    return res.status(200).json({ message: "Auth Passed", token });
+    return res
+      .status(200)
+      .json({ message: "Auth Passed", token, expires: opts.expiresIn });
   }
 
   return res.status(401).json({ message: "Incorrect password!" });
