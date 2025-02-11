@@ -1,9 +1,9 @@
 const asyncHandler = require("express-async-handler");
-const { PrismaClient } = require("@prisma/client");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { prismaClientSelector } = require("../../helpers/prismaClientSelector");
 
-const prisma = new PrismaClient();
+const prisma = prismaClientSelector();
 
 module.exports.logIn = asyncHandler(async (req, res) => {
   const { username, password } = req.body;

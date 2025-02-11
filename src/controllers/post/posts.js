@@ -1,10 +1,10 @@
-const { PrismaClient } = require("@prisma/client");
 const asyncHandler = require("express-async-handler");
 const { sanitizeHTML } = require("../../helpers/sanitizeHTML");
 const { sliceContent } = require("../../helpers/parseAndSliceContent");
 const { tagsToPrisma } = require("../../helpers/parsePostTagsForPrismaCreate");
+const { prismaClientSelector } = require("../../helpers/prismaClientSelector");
 
-const prisma = new PrismaClient();
+const prisma = prismaClientSelector();
 
 /**
  * Adds a 'post' to the database.

@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js",
-    "proxy": "lcp --proxyUrl http://localhost:5173"
+    "start": "NODE_ENV=production && node src/app.js",
+    "dev": "NODE_ENV=development && nodemon src/app.js",
+    "test": "NODE_ENV=test && jest --watch --runInBand",
+    "proxy": "lcp --proxyUrl http://localhost:8000"
   },
   "keywords": [],
   "author": "",
@@ -31,8 +32,10 @@
     "passport-jwt": "^4.0.1"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.9",
     "prettier": "^3.4.2",
-    "prisma": "^6.2.1"
+    "prisma": "^6.2.1",
+    "supertest": "^7.0.0"
   }
 }

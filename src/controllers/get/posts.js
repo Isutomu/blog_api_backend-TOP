@@ -1,7 +1,7 @@
-const { PrismaClient } = require("@prisma/client");
 const asyncHandler = require("express-async-handler");
+const { prismaClientSelector } = require("../../helpers/prismaClientSelector");
 
-const prisma = new PrismaClient();
+const prisma = prismaClientSelector();
 
 /**
  * Fetches all 'posts'.
@@ -16,11 +16,11 @@ const prisma = new PrismaClient();
 module.exports.allPosts = asyncHandler(async (req, res) => {
   const posts = await prisma.post.findMany({
     include: {
-      tags: true,
+      tags: { select: { name: true } },
     },
   });
 
-  return res.json({ data: posts });
+  return res.status(200).json({ data: posts });
 });
 
 /**
@@ -37,11 +37,11 @@ module.exports.singlePost = asyncHandler(async (req, res) => {
   const post = await prisma.post.findFirst({
     where: { id: req.params.postId },
     include: {
-      tags: true,
+      tags: { select: { name: true } },
     },
   });
 
-  return res.json({ data: post });
+  return res.status(200).json({ data: post });
 });
 
 /**
@@ -59,7 +59,7 @@ module.exports.searchByTag = asyncHandler(async (req, res) => {
   const posts = await prisma.tag.findFirst({
     where: { name: req.params.tagName },
     select: {
-      posts: { include: { tags: true } },
+      posts: { include: { tags: { select: { name: true } } } },
     },
   });
 
