@@ -18,7 +18,7 @@ const prisma = prismaClientSelector();
 module.exports.singlePost = asyncHandler(async (req, res) => {
   const { image, title, content, tags } = req.body;
   const userId = req.user.id;
-  const contentPreview = sliceContent(sanitizeHTML(content));
+  const contentPreview = sliceContent(sanitizeHTML(content), 250);
 
   const post = {
     image,
@@ -47,7 +47,7 @@ module.exports.updatePost = asyncHandler(async (req, res) => {
   const { postId } = req.params;
   const { image, title, content, tags } = req.body;
   const userId = req.user.id;
-  const contentPreview = sliceContent(sanitizeHTML(content));
+  const contentPreview = sliceContent(sanitizeHTML(content), 250);
 
   const post = {
     image,
