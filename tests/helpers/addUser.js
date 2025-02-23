@@ -14,6 +14,7 @@ const addUser = async (user) => {
       data: {
         id: user.id,
         username: user.username,
+        email: user.email,
         password: hashedPassword,
       },
     });

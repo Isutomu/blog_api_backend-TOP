@@ -16,23 +16,28 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/", routes);
 
+// Auxiliary functions
+const cleanDatabase = async () => {
+  const prisma = prismaClientSelector();
+  await prisma.tag.deleteMany({});
+  await prisma.post.deleteMany({});
+  await prisma.user.deleteMany({});
+};
+
 // tests
 describe("Get tests", () => {
   const testData = require("../helpers/data");
 
   // pre-test
   beforeAll(async () => {
+    await cleanDatabase();
+
     // add couple entries for all tables
     await addUser(testData.user);
     await addPosts(testData.posts);
   });
   // post-test
-  afterAll(async () => {
-    const prisma = prismaClientSelector();
-    await prisma.tag.deleteMany({});
-    await prisma.post.deleteMany({});
-    await prisma.user.deleteMany({});
-  });
+  afterAll(async () => await cleanDatabase());
 
   test("Get alls posts route work", (done) => {
     request(app)
@@ -83,16 +88,13 @@ describe("Test posts", () => {
 
   // pre-test
   beforeAll(async () => {
+    await cleanDatabase();
+
     await addUser(testData.user);
     await addPosts([testData.posts[1]]);
   });
   //post-test
-  afterAll(async () => {
-    const prisma = prismaClientSelector();
-    await prisma.tag.deleteMany({});
-    await prisma.post.deleteMany({});
-    await prisma.user.deleteMany({});
-  });
+  afterAll(async () => await cleanDatabase());
 
   const login = () =>
     request(app)
@@ -124,8 +126,8 @@ describe("Test posts", () => {
         .expect("Content-Type", /json/)
         .expect((res) =>
           expect(res.body.data).toEqual(
-            expect.objectContaining(partialPostResponse)
-          )
+            expect.objectContaining(partialPostResponse),
+          ),
         )
         .expect(201, done);
     });
@@ -149,10 +151,29 @@ describe("Test posts", () => {
         .expect("Content-Type", /json/)
         .expect((res) =>
           expect(res.body.data).toEqual(
-            expect.objectContaining(partialPostResponse)
-          )
+            expect.objectContaining(partialPostResponse),
+          ),
         )
         .expect(200, done);
     });
+  });
+
+  test("Create a new user", (done) => {
+    const expectedParcialData = {
+      username: testData.newUser.username,
+      email: testData.newUser.email,
+    };
+
+    request(app)
+      .post("/signup")
+      .type("json")
+      .send(testData.newUser)
+      .expect("Content-Type", /json/)
+      .expect((res) =>
+        expect(res.body.data).toEqual(
+          expect.objectContaining(expectedParcialData),
+        ),
+      )
+      .expect(201, done);
   });
 });

@@ -1,9 +1,10 @@
 # blog_api_backend-TOP
+
 > [!NOTE]
 > This is a REST-ish API. In the future I plan to refactor to RESTful, but it's not a priority.
 
 > [!IMPORTANT]
-> This is only the 	**backend** of the project. Be sure to also visit [frontend visitor](https://github.com/Isutomu/blog_api_visitor-TOP) and [frontend admin](https://github.com/Isutomu/blog_api_admin-TOP).
+> This is only the **backend** of the project. Be sure to also visit [frontend visitor](https://github.com/Isutomu/blog_api_visitor-TOP) and [frontend admin](https://github.com/Isutomu/blog_api_admin-TOP).
 
 > [!CAUTION]
 > This project is purely meant to be used as a tool for self-improvement, so I sincerely recommend you to not use this. But, in case you do decide to use it either way, please do credit me.
@@ -12,6 +13,7 @@ This is the backend of the project [Blog API](https://www.theodinproject.com/les
 The notable abscence of commits is due to the fact that this project was originally hosted on this [GitHub Repository](https://github.com/Isutomu/blog_api-TOP).
 
 ## Pointlessly long preface
+
 I ended up splitting the previously mentioned respository on three because deploying was considerably easier this way, and so it was maintaining it to be honest (try to be on the level of a junior programmer and deal with essentially three projects in one VSCODE window).\
 I also decided to transpose this into a new repository by directly uploading the files, as at the time this seemed like the easiest way to do it.
 
@@ -26,8 +28,8 @@ There is no particular reason why I chose this project to maintain besides this 
 > [!IMPORTANT]
 > Modifiers ("not priority" and the like) don't imply importance. Most of the time they simply mean that I thought they were too difficult to tackle for now.
 
-- Set up cors with whitelist for the currently deployed frontends
-- Implement other more obvious security measures by  proper configuring (and enabling) the helmet middleware
+- ~~Set up cors with whitelist for the currently deployed frontends~~
+- Implement other more obvious security measures by proper configuring (and enabling) the helmet middleware
 - Test the current security measures and thicken them as needed (measures with be listed below after implementation)
 - (Not priority) Implement authentication for the currently unprotected routes
 - (Not priority) Change the authentication method for a more roubst (or make the current JWT implementation more robust)
@@ -38,4 +40,5 @@ There is no particular reason why I chose this project to maintain besides this 
 - (Really not a priority) Convert to Typescript
 - (Not priority) Add proper error handling for the application
 - Validate user input data (express-validator)
+  - ~~Sign up~~
 - Implement testing (unit testing? integration testing?)

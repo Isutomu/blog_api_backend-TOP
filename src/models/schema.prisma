@@ -9,13 +9,14 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
   id       String  @id @default(uuid())
   username String  @unique @db.VarChar(25)
+  email    String  @unique @db.VarChar(40)
   /// This is the hashed password
   password String
   admin    Boolean @default(false)
