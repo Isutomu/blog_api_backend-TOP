@@ -4,6 +4,7 @@ const { prismaClientSelector } = require("../../helpers/prismaClientSelector");
 const { body, validationResult } = require("express-validator");
 
 const prisma = prismaClientSelector();
+const saltRounds = 10;
 
 const lengthErrUsername = "must be between 3 and 25 characters.";
 const lengthErrEmail = "must be between 13 and 40 characters.";
@@ -47,24 +48,30 @@ module.exports.signUp = [
         .send({ errors: "Username and/or email unavailable." });
     }
 
-    bcrypt.hash(password, 10, async (err, hashedPassword) => {
-      if (err) throw err;
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+      if (err) {
+        throw err;
+      }
+      bcrypt.hash(password, salt, async (err, hashedPassword) => {
+        if (err) throw err;
 
-      const createdUser = await prisma.user.create({
-        data: {
-          username: username,
-          email: email,
-          password: hashedPassword,
-          admin: false,
-        },
+        const createdUser = await prisma.user.create({
+          data: {
+            username: username,
+            email: email,
+            password: hashedPassword,
+            admin: false,
+            salt: salt,
+          },
+        });
+
+        const responseData = {
+          username: createdUser.username,
+          email: createdUser.email,
+          admin: createdUser.admin,
+        };
+        return res.status(201).json({ data: responseData });
       });
-
-      const responseData = {
-        username: createdUser.username,
-        email: createdUser.email,
-        admin: createdUser.admin,
-      };
-      return res.status(201).json({ data: responseData });
     });
   }),
 ];
