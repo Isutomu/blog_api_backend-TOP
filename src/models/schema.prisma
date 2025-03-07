@@ -19,6 +19,7 @@ model User {
   email    String  @unique @db.VarChar(40)
   /// This is the hashed password
   password String
+  salt     String
   admin    Boolean @default(false)
   posts    Post[]
 }
