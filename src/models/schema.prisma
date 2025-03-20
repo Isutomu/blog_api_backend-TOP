@@ -14,31 +14,44 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(uuid())
-  username String  @unique @db.VarChar(25)
-  email    String  @unique @db.VarChar(40)
+  id       String    @id @default(uuid())
+  username String    @unique @db.VarChar(25)
+  email    String    @unique @db.VarChar(40)
   /// This is the hashed password
   password String
   salt     String
-  admin    Boolean @default(false)
+  admin    Boolean   @default(false)
   posts    Post[]
+  comments Comment[]
 }
 
 model Post {
-  id             String   @id @default(uuid())
+  id             String    @id @default(uuid())
   image          String
-  title          String   @unique @db.VarChar(50)
+  title          String    @unique @db.VarChar(50)
   content        String
   contentPreview String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @default(now())
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now())
   tags           Tag[]
-  user           User     @relation(fields: [userId], references: [id])
+  user           User      @relation(fields: [userId], references: [id])
   userId         String
+  comments       Comment[]
 }
 
 model Tag {
   id    String @id @default(uuid())
   name  String @unique
   posts Post[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
 }
