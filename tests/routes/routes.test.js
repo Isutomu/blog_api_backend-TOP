@@ -159,7 +159,7 @@ describe("Test posts", () => {
   });
 
   test("Create a new user", (done) => {
-    const expectedParcialData = {
+    const expectedPartialData = {
       username: testData.newUser.username,
       email: testData.newUser.email,
     };
@@ -171,9 +171,52 @@ describe("Test posts", () => {
       .expect("Content-Type", /json/)
       .expect((res) =>
         expect(res.body.data).toEqual(
-          expect.objectContaining(expectedParcialData),
+          expect.objectContaining(expectedPartialData),
         ),
       )
       .expect(201, done);
+  });
+});
+
+describe("Test comments", () => {
+  const testData = require("../helpers/data");
+
+  // pre-test
+  beforeAll(async () => {
+    await cleanDatabase();
+
+    // add couple entries for all tables
+    await addUser(testData.user);
+    await addPosts(testData.posts);
+  });
+  // post-test
+  afterAll(async () => await cleanDatabase());
+
+  const login = () =>
+    request(app)
+      .post("/login")
+      .type("json")
+      .send(testData.user)
+      .expect("Content-Type", /json/);
+
+  test("Post a new comment", (done) => {
+    const testComment = testData.comments[0];
+
+    login().then((res) => {
+      request(app)
+        .post("/comments")
+        .type("json")
+        .set("Authorization", `Bearer ${res.body.token}`)
+        .send(testComment)
+        .expect("Content-Type", /json/)
+        .expect({ data: testComment })
+        .expect(201, done);
+      // .end((err, res) => {
+      //   if (err) {
+      //     console.error(res.error);
+      //   }
+      //   done(err);
+      // });
+    });
   });
 });

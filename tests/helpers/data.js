@@ -41,3 +41,12 @@ module.exports.newUser = {
   email: "newEmail@email.com",
   password: "password",
 };
+
+module.exports.comments = [
+  {
+    postId: "c14918bf-1787-4314-8748-949b22df9098",
+    content: "content",
+    createdAt: "2025-02-07T20:34:42.965Z",
+    updatedAt: "2025-02-07T20:34:42.965Z",
+  },
+];

@@ -16,6 +16,7 @@ const addUser = async (user) => {
         username: user.username,
         email: user.email,
         password: hashedPassword,
+        salt: "salt",
       },
     });
   });

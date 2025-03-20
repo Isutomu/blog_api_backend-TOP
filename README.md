@@ -42,3 +42,4 @@ There is no particular reason why I chose this project to maintain besides this 
 - Validate user input data (express-validator)
   - ~~Sign up~~
 - Implement testing (unit testing? integration testing?)
+- Implement new comment route
