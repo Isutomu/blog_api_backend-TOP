@@ -32,7 +32,7 @@ There is no particular reason why I chose this project to maintain besides this 
 - Implement other more obvious security measures by proper configuring (and enabling) the helmet middleware
 - Test the current security measures and thicken them as needed (measures with be listed below after implementation)
 - (Not priority) Implement authentication for the currently unprotected routes
-- (Not priority) Change the authentication method for a more roubst (or make the current JWT implementation more robust)
+- (Not priority) Change the authentication method for a more robust (or make the current JWT implementation more robust)
 - Refactor folder structure
 - Migrate from commonJS to ES6
 - (Not priority) Generate documentation of the API (automatic? manual? automatic with manual touch ups?)
@@ -41,5 +41,10 @@ There is no particular reason why I chose this project to maintain besides this 
 - (Not priority) Add proper error handling for the application
 - Validate user input data (express-validator)
   - ~~Sign up~~
-- Implement testing (unit testing? integration testing?)
-- Implement new comment route
+  - Create Post
+  - Update Post
+  - Create Comment
+  - Update Comment
+- ~~Implement testing (unit testing? integration testing? update: integration test!)~~
+- ~~Implement new comment route~~
+- ~~Update comment route~~
