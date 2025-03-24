@@ -44,9 +44,15 @@ module.exports.newUser = {
 
 module.exports.comments = [
   {
+    id: "id1",
     postId: "c14918bf-1787-4314-8748-949b22df9098",
-    content: "content",
-    createdAt: "2025-02-07T20:34:42.965Z",
-    updatedAt: "2025-02-07T20:34:42.965Z",
+    userId: "778fb80f-7621-4523-87b2-945629ecf5c8",
+    content: "content1",
+  },
+  {
+    id: "id2",
+    postId: "c14918bf-1787-4314-8748-949b22df9098",
+    userId: "778fb80f-7621-4523-87b2-945629ecf5c8",
+    content: "content2",
   },
 ];
