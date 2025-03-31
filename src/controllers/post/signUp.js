@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const { prismaClientSelector } = require("../../helpers/prismaClientSelector");
 const { body, validationResult } = require("express-validator");
+const { sanitizeHTML } = require("../../helpers/sanitizeHTML");
 
 const prisma = prismaClientSelector();
 const saltRounds = 10;
@@ -32,6 +33,13 @@ module.exports.signUp = [
     }
 
     const { username, email, password } = req.body;
+    const sanitizedUsername = sanitizeHTML(username);
+    if (username !== sanitizedUsername) {
+      return res.status(400).json({
+        errors: "The username should only contain letters and numbers.",
+      });
+    }
+
     const userUnavailable = await prisma.user.findFirst({
       where: {
         OR: [
